@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      get 'users' => 'users#index'
+      put 'users/update' => 'users#update'
+      post 'users/sign_up' => 'users#create'
+      post 'users/sign_in' => 'user_token#create'
+    end
+  end
 end
