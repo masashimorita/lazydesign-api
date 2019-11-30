@@ -5,9 +5,7 @@ module Api
       skip_before_action :verify_authenticity_token
 
       def create
-        user_json = response_fields(entity.to_json)
-        user_json[:token] = auth_token.token
-        response_success({user: user_json})
+        response_success(UserSerializer.new(entity, {params: {token: auth_token.token}}).serialized_json)
       end
 
       private

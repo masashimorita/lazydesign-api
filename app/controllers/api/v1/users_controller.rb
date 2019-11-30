@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user, except: [:create, :logout]
 
       def index
-        response_success(response_fields(current_user.to_json))
+        response_success(UserSerializer.new(current_user).serialized_json)
       end
 
       def create
@@ -13,19 +13,13 @@ module Api
 
         @user = User.create!(users_params)
         token = auth_token(@user).token
-        user_json = response_fields(@user.to_json).merge(token: token)
-        response_success(user_json)
+        response_success(UserSerializer.new(@user, {params: {token: token}}).serialized_json)
       end
 
       private
 
       def users_params
         params.permit(:name, :email, :password)
-      end
-
-      def response_fields(user_json)
-        user_parse = JSON.parse(user_json)
-        user_parse.except('created_at', 'updated_at', 'password', 'password_digest')
       end
 
       def auth_token(entity)
