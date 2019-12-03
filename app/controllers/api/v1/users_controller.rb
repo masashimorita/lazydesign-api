@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user, except: [:create]
 
       def index
-        response_success(::UserSerializer.new(current_user).serialized_json)
+        response_success(Api::V1::UserSerializer.new(current_user).serialized_json)
       end
 
       def create
@@ -13,7 +13,7 @@ module Api
 
         @user = User.create!(sign_up_params)
         token = auth_token(@user).token
-        response_success(::UserSerializer.new(@user, {params: {token: token}}).serialized_json)
+        response_success(Api::V1::UserSerializer.new(@user, {params: {token: token}}).serialized_json)
       end
 
       def update
@@ -23,7 +23,7 @@ module Api
           @user[key] = value
         end
         @user.save!
-        response_success(::UserSerializer.new(@user))
+        response_success(Api::V1::UserSerializer.new(@user))
       end
 
       private
