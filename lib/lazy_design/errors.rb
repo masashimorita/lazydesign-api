@@ -6,9 +6,9 @@ module LazyDesign
       end
     end
 
-    def self.error_message message
+    def self.error_message error_message
       define_method :error_message do
-        message
+        self.message || error_message
       end
     end
   end
@@ -16,6 +16,11 @@ module LazyDesign
   class BadRequest < ApplicationError
     status_code 400
     error_message "Bad Request"
+  end
+
+  class ForbiddenError < ApplicationError
+    status_code 403
+    error_message "Forbidden Operation"
   end
 
   class NotFoundError < ApplicationError
@@ -26,5 +31,10 @@ module LazyDesign
   class ConflictError < ApplicationError
     status_code 409
     error_message "Record Conflict Occurred"
+  end
+
+  class InvalidParameterError < ApplicationError
+    status_code 422
+    error_message "Invalid API Parameter was given"
   end
 end
