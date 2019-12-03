@@ -1,7 +1,6 @@
 require 'lazy_design/errors'
 
 class ApplicationController < ActionController::API
-  include Knock::Authenticable
   include Response
 
   rescue_from StandardError do |e|
