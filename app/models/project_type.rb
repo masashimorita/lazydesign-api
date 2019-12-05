@@ -1,2 +1,0 @@
-class ProjectType < ApplicationRecord
-end

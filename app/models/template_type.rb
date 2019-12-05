@@ -1,2 +1,0 @@
-class TemplateType < ApplicationRecord
-end

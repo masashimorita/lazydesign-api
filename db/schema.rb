@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_024651) do
+ActiveRecord::Schema.define(version: 2019_12_05_135137) do
 
   create_table "configuration_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "configuration_type_name"
@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_024651) do
   create_table "file_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "file_type_name", null: false
     t.string "file_extension", null: false
-  end
-
-  create_table "project_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "project_type_name", null: false
-  end
-
-  create_table "template_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "template_type_name", null: false
   end
 
   create_table "users", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
