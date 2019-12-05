@@ -29,11 +29,11 @@ module Api
       private
 
       def sign_up_params
-        params.permit(:name, :email, :password)
+        params.require(:user).permit(:name, :email, :password)
       end
 
       def update_params
-        params.permit(:name, :email)
+        params.require(:user).permit(:name, :email)
       end
 
       def auth_token(entity)
