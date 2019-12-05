@@ -13,7 +13,7 @@ module Api
 
         @user = User.create!(sign_up_params)
         token = auth_token(@user).token
-        response_success(Api::V1::UserSerializer.new(@user, {params: {token: token}}).serialized_json)
+        response_item_created(Api::V1::UserSerializer.new(@user, {params: {token: token}}).serialized_json)
       end
 
       def update

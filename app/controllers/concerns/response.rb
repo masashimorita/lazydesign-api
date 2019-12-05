@@ -12,6 +12,11 @@ module Response
     json_response(object, 200)
   end
 
+  # 201 Item Created
+  def response_item_created(object)
+    json_response(object, 201)
+  end
+
   # 400 Bad Request
   def response_bad_request
     json_response({message: "Bad Request" }, 400)
