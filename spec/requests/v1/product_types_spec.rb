@@ -97,6 +97,10 @@ RSpec.describe "Api::V1::ProductTypeAPI", type: :request do
       it "update product type record" do
         expect{ subject }.to change{ ProductType.find_by(product_type_id: product_type_id)[:product_type_name] }.to(new_product_type_name)
       end
+      it "has valid json schema" do
+        subject
+        expect(response).to match_response_schema("v1/product_type")
+      end
       it "return not found response when invalid id is given" do
         put_with_auth "#{path}/invalid", params
         expect(response.status).to eq 404
