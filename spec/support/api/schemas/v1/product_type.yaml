@@ -1,0 +1,25 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    type: object
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      attributes:
+        type: object
+        required:
+          - product_type_id
+          - product_type_name
+        properties:
+          product_type_id:
+            type: integer
+          product_type_name:
+            type: string

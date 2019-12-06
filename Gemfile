@@ -32,9 +32,11 @@ gem 'fast_jsonapi'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
+  gem 'rspec-rails', '4.0.0.beta3'
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'json-schema'
 end
 
 group :development do
