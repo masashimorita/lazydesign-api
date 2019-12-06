@@ -1,6 +1,7 @@
 module Api
   module V1
     class ProductTypesController < Api::V1::ApiController
+      before_action :authenticate_user
       before_action :find_record, only: [:show, :update, :destroy]
 
       def index
@@ -13,16 +14,16 @@ module Api
       end
 
       def update
-        if request_params[:product_type_name].blank?
+        if update_params[:product_type_name].blank?
           raise LazyDesign::InvalidParameterError, "Required parameter :product_type_name is not valid"
         end
-        @product_type.update!(product_type_name: request_params[:product_type_name])
+        @product_type.update!(update_params)
         response_success(Api::V1::ProductTypeSerializer.new(@product_type).serialized_json)
       end
 
       def create
         product_type = ProductType.create!(request_params)
-        response_success(Api::V1::ProductTypeSerializer.new(product_type).serialized_json)
+        response_item_created(Api::V1::ProductTypeSerializer.new(product_type).serialized_json)
       end
 
       def destroy
@@ -33,11 +34,15 @@ module Api
       private
 
       def request_params
-        params.require(:product_type).permit(:product_id, :product_type_name)
+        params.require(:product_type).permit(:product_type_id, :product_type_name)
+      end
+
+      def update_params
+        params.require(:product_type).permit(:product_type_name)
       end
 
       def find_record
-        @product_type = ProductType.find_by(product_id: params[:id])
+        @product_type = ProductType.find_by(product_type_id: params[:id])
         raise LazyDesign::NotFoundError, "Product Type Record with #{params[:id]} Not Found" unless @product_type
       end
     end

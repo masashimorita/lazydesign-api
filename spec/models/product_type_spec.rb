@@ -1,4 +1,4 @@
-require "#{__dir__}/../rails_helper"
+require "rails_helper"
 
 RSpec.describe ProductType, type: :model do
   describe "Model Validation" do
