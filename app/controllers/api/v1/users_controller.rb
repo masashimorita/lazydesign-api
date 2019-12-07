@@ -3,13 +3,13 @@ module Api
     class UsersController < Api::V1::ApiController
       before_action :authenticate_user, except: [:create]
 
-      def index
+      def show
         response_success(Api::V1::UserSerializer.new(current_user).serialized_json)
       end
 
       def create
         raise LazyDesign::ConflictError, "User Record Conflict Occurred" if User.exists?(email: sign_up_params[:email])
-        raise LazyDesign::BadRequest if sign_up_params[:name].blank?
+        raise LazyDesign::BadRequest if sign_up_params[:name].blank? || sign_up_params[:email].blank? || sign_up_params[:password].blank?
 
         @user = User.create!(sign_up_params)
         token = auth_token(@user).token
