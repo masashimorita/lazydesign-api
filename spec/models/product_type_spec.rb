@@ -10,8 +10,8 @@ RSpec.describe ProductType, type: :model do
   end
 
   describe "Association" do
-    context "with templates" do
-      it { should have_many(:templates) }
+    it "has many :templates" do
+      should have_many(:templates)
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_070326) do
+ActiveRecord::Schema.define(version: 2019_12_09_073928) do
 
   create_table "configuration_types", primary_key: "configuration_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "configuration_type_name"
@@ -31,7 +31,16 @@ ActiveRecord::Schema.define(version: 2019_12_09_070326) do
     t.string "product_type_name", null: false
   end
 
-  create_table "template_parts", primary_key: "template_part_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "template_infos", primary_key: "template_info_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.binary "template_id", limit: 128, null: false
+    t.binary "template_part_id", limit: 128, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["template_id"], name: "fk_rails_577bb18098"
+    t.index ["template_part_id"], name: "fk_rails_dfd8ac0a46"
+  end
+
+  create_table "template_parts", primary_key: "template_part_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "part_name", null: false
     t.text "part_description"
     t.string "part_thumbnail"
@@ -43,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_070326) do
 
   create_table "templates", primary_key: "template_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "product_type_id", null: false
-    t.string "template_name"
+    t.string "template_name", null: false
     t.text "template_description"
     t.string "template_thumbnail"
     t.datetime "created_at", precision: 6, null: false
@@ -59,5 +68,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_070326) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "template_infos", "template_parts", primary_key: "template_part_id"
+  add_foreign_key "template_infos", "templates", primary_key: "template_id"
   add_foreign_key "templates", "product_types", primary_key: "product_type_id"
 end

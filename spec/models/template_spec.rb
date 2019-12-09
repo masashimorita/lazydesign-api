@@ -6,8 +6,14 @@ RSpec.describe Template, type: :model do
   end
 
   describe "Association" do
-    context "with :product_type" do
-      it { should belong_to(:product_type) }
+    it "has many :template_infos" do
+      should have_many(:template_infos)
+    end
+    it "has many :template_parts" do
+      should have_many(:template_parts)
+    end
+    it "belongs to :product_type" do
+      should belong_to(:product_type)
     end
   end
 end
