@@ -6,5 +6,8 @@ RSpec.describe TagGroup, type: :model do
   end
 
   describe "Association" do
+    it "has many :tags" do
+      should have_many(:tags)
+    end
   end
 end
