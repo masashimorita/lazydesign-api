@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_080854) do
     t.string "tag_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_group_id"], name: "fk_rails_a74f8e9a76"
   end
 
   create_table "template_infos", primary_key: "template_info_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_080854) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "tags", "tag_groups", primary_key: "tag_group_id"
   add_foreign_key "template_infos", "template_parts", primary_key: "template_part_id"
   add_foreign_key "template_infos", "templates", primary_key: "template_id"
   add_foreign_key "templates", "product_types", primary_key: "product_type_id"

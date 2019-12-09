@@ -7,5 +7,6 @@ class CreateTags < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_foreign_key :tags, :tag_groups, primary_key: :tag_group_id, column: :tag_group_id
   end
 end
