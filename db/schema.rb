@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_054841) do
+ActiveRecord::Schema.define(version: 2019_12_09_070326) do
 
   create_table "configuration_types", primary_key: "configuration_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "configuration_type_name"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2019_12_09_054841) do
 
   create_table "product_types", primary_key: "product_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "product_type_name", null: false
+  end
+
+  create_table "template_parts", primary_key: "template_part_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "part_name", null: false
+    t.text "part_description"
+    t.string "part_thumbnail"
+    t.text "content_markup", null: false
+    t.text "content_style"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "templates", primary_key: "template_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
