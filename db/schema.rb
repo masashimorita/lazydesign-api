@@ -10,30 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_091838) do
+ActiveRecord::Schema.define(version: 2019_12_13_151752) do
 
-  create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
     t.string "deploy_program", null: false
     t.string "entry_point", null: false
   end
 
-  create_table "file_types", primary_key: "file_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "file_types", primary_key: "file_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "file_type_name", null: false
     t.string "file_extension", null: false
   end
 
-  create_table "product_types", primary_key: "product_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "product_types", primary_key: "product_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "product_type_name", null: false
   end
 
-  create_table "tag_groups", primary_key: "tag_group_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "project_statuses", primary_key: "project_status_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "project_status_name"
+  end
+
+  create_table "tag_groups", primary_key: "tag_group_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "group_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tags", primary_key: "tag_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "tags", primary_key: "tag_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.binary "tag_group_id", limit: 128, null: false
     t.string "tag_name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -41,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_091838) do
     t.index ["tag_group_id"], name: "fk_rails_a74f8e9a76"
   end
 
-  create_table "template_infos", primary_key: "template_info_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "template_infos", primary_key: "template_info_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.binary "template_id", limit: 128, null: false
     t.binary "template_part_id", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -50,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_091838) do
     t.index ["template_part_id"], name: "fk_rails_dfd8ac0a46"
   end
 
-  create_table "template_parts", primary_key: "template_part_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "template_parts", primary_key: "template_part_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "part_name", null: false
     t.text "part_description"
     t.string "part_thumbnail"
@@ -60,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_091838) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "templates", primary_key: "template_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "templates", primary_key: "template_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_type_id", null: false
     t.string "template_name", null: false
     t.text "template_description"
@@ -70,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_091838) do
     t.index ["product_type_id"], name: "fk_rails_6d798429e5"
   end
 
-  create_table "users", primary_key: "user_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "users", primary_key: "user_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "password_digest"
     t.string "name"
     t.string "email"
