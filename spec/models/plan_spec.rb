@@ -16,5 +16,9 @@ RSpec.describe Plan, type: :model do
     it "belongs to :plan_type" do
       should belong_to(:plan_type)
     end
+
+    it "has many :permissions" do
+      should have_many(:permissions)
+    end
   end
 end

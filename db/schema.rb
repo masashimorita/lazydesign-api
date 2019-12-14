@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_113515) do
+ActiveRecord::Schema.define(version: 2019_12_14_121954) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 2019_12_14_113515) do
     t.string "currency", null: false
     t.integer "interval", null: false
     t.string "statement_descriptor"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plans_permissions", primary_key: "plan_permission_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "permission_id", null: false
+    t.binary "plan_id", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

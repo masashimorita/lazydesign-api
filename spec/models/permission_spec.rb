@@ -14,5 +14,9 @@ RSpec.describe Permission, type: :model do
     it "has many :users" do
       should have_many(:users)
     end
+
+    it "has many :plans" do
+      should have_many(:plans)
+    end
   end
 end
