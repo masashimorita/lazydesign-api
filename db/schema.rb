@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_154438) do
+ActiveRecord::Schema.define(version: 2019_12_14_111558) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 2019_12_13_154438) do
 
   create_table "plan_types", primary_key: "plan_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "plan_type_name"
+  end
+
+  create_table "plans", primary_key: "plan_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "plan_type_id", null: false
+    t.string "stripe_plan_id", null: false
+    t.string "plan_name", null: false
+    t.integer "amount", null: false
+    t.string "currency", null: false
+    t.integer "interval", null: false
+    t.string "statement_descriptor"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "product_types", primary_key: "product_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|

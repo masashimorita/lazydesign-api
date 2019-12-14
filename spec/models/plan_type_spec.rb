@@ -8,4 +8,10 @@ RSpec.describe PlanType, type: :model do
     it { should validate_numericality_of(:plan_type_id) }
     it { should validate_presence_of(:plan_type_name) }
   end
+
+  describe "Association" do
+    it "has many to :plans" do
+      should have_many(:plans)
+    end
+  end
 end
