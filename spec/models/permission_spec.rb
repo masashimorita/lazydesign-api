@@ -9,4 +9,10 @@ RSpec.describe Permission, type: :model do
     it { should validate_presence_of(:permission_code) }
     it { should validate_presence_of(:permission_description) }
   end
+
+  describe "Association" do
+    it "has many :users" do
+      should have_many(:users)
+    end
+  end
 end
