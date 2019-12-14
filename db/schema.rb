@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_121954) do
+ActiveRecord::Schema.define(version: 2019_12_14_134537) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(version: 2019_12_14_121954) do
     t.index ["product_type_id"], name: "fk_rails_6d798429e5"
   end
 
+  create_table "templates_tags", primary_key: "template_tag_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.binary "template_id", limit: 128, null: false
+    t.binary "tag_id", limit: 128, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "fk_rails_b94da85ebf"
+    t.index ["template_id"], name: "fk_rails_270f31b711"
+  end
+
   create_table "users", primary_key: "user_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "password_digest"
     t.string "name"
@@ -129,6 +138,8 @@ ActiveRecord::Schema.define(version: 2019_12_14_121954) do
   add_foreign_key "template_infos", "template_parts", primary_key: "template_part_id"
   add_foreign_key "template_infos", "templates", primary_key: "template_id"
   add_foreign_key "templates", "product_types", primary_key: "product_type_id"
+  add_foreign_key "templates_tags", "tags", primary_key: "tag_id"
+  add_foreign_key "templates_tags", "templates", primary_key: "template_id"
   add_foreign_key "users_permissions", "permissions", primary_key: "permission_id"
   add_foreign_key "users_permissions", "users", primary_key: "user_id"
 end

@@ -6,6 +6,9 @@ RSpec.describe Tag, type: :model do
   end
 
   describe "Association" do
+    it "has many to :templates" do
+      should have_many(:templates)
+    end
     it "belongs to :tag_group" do
       should belong_to(:tag_group)
     end
