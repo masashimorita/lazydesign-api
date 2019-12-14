@@ -12,5 +12,13 @@ RSpec.describe User, type: :model do
     it "has many :permissions" do
       should have_many(:permissions)
     end
+
+    it "has many :subscriptions" do
+      should have_many(:subscriptions)
+    end
+
+    it "has many :plans" do
+      should have_many(:plans)
+    end
   end
 end
