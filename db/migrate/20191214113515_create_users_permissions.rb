@@ -7,5 +7,7 @@ class CreateUsersPermissions < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_foreign_key :users_permissions, :permissions, primary_key: :permission_id, column: :permission_id
+    add_foreign_key :users_permissions, :users, primary_key: :user_id, column: :user_id
   end
 end

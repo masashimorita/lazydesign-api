@@ -12,5 +12,6 @@ class CreatePlans < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_foreign_key :plans, :plan_types, primary_key: :plan_type_id, column: :plan_type_id
   end
 end

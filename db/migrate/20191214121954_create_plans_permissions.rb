@@ -7,5 +7,7 @@ class CreatePlansPermissions < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_foreign_key :plans_permissions, :permissions, primary_key: :permission_id, column: :permission_id
+    add_foreign_key :plans_permissions, :plans, primary_key: :plan_id, column: :plan_id
   end
 end
