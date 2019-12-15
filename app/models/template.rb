@@ -1,6 +1,6 @@
 class Template < ApplicationRecord
   self.primary_key = :template_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   has_many :projects, primary_key: :template_id, foreign_key: :template_id
   has_many :template_infos, primary_key: :template_id, foreign_key: :template_id

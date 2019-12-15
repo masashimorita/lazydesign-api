@@ -1,6 +1,6 @@
 class Invoice < ApplicationRecord
   self.primary_key = :invoice_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   belongs_to :user, primary_key: :user_id, foreign_key: :user_id
 

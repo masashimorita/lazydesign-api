@@ -1,6 +1,6 @@
 class Configuration < ApplicationRecord
   self.primary_key = :configuration_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   belongs_to :configurator, polymorphic: true
 

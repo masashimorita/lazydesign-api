@@ -1,6 +1,6 @@
 class Plan < ApplicationRecord
   self.primary_key = :plan_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   belongs_to :plan_type, primary_key: :plan_type_id, foreign_key: :plan_type_id
   has_many :plans_permissions, primary_key: :plan_id, foreign_key: :plan_id

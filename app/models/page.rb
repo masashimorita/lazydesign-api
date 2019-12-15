@@ -1,6 +1,6 @@
 class Page < ApplicationRecord
   self.primary_key = :page_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   belongs_to :container, polymorphic: true
   has_many :file_contents, primary_key: :page_id, foreign_key: :page_id

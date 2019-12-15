@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
   self.primary_key = :project_id
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
 
   belongs_to :product_type, primary_key: :product_type_id, foreign_key: :product_type_id
   belongs_to :template, primary_key: :template_id, foreign_key: :template_id
