@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   belongs_to :user, primary_key: :user_id, foreign_key: :user_id
   belongs_to :project_status, primary_key: :project_status_id, foreign_key: :project_status_id
   belongs_to :project_group, primary_key: :project_group_id, foreign_key: :project_group_id
+  has_many :configurations, as: :configurator
   has_many :deploy_histories, primary_key: :project_id, foreign_key: :project_id
   has_one :domain, primary_key: :project_id, foreign_key: :project_id
 

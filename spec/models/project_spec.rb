@@ -31,6 +31,10 @@ RSpec.describe Project, type: :model do
       should have_many(:deploy_histories)
     end
 
+    it "has many :configurations" do
+      should have_many(:configurations)
+    end
+
     it "has one :domain" do
       should have_one(:domain)
     end

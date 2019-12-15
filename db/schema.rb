@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_051945) do
+ActiveRecord::Schema.define(version: 2019_12_15_055913) do
+
+  create_table "configurations", primary_key: "configuration_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "configurator_type"
+    t.bigint "configurator_id"
+    t.string "configuration_key", null: false
+    t.text "configuration_value", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["configurator_type", "configurator_id"], name: "index_configurations_on_configurator_type_and_configurator_id"
+  end
 
   create_table "deploy_histories", primary_key: "deploy_history_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "deploy_method_id", null: false

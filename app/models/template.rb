@@ -7,6 +7,7 @@ class Template < ApplicationRecord
   has_many :template_parts, through: :template_infos, source: :template_part
   has_many :templates_tags, primary_key: :template_id, foreign_key: :template_id
   has_many :tags, through: :templates_tags, source: :tag
+  has_many :configurations, as: :configurator
   belongs_to :product_type, primary_key: :product_type_id, foreign_key: :product_type_id
 
   validates :template_name, presence: true
