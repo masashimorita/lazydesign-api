@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_141807) do
+ActiveRecord::Schema.define(version: 2019_12_14_144220) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -21,6 +21,29 @@ ActiveRecord::Schema.define(version: 2019_12_14_141807) do
   create_table "file_types", primary_key: "file_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "file_type_name", null: false
     t.string "file_extension", null: false
+  end
+
+  create_table "invoices", primary_key: "invoice_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.binary "user_id", limit: 128, null: false
+    t.string "stripe_customer_id", null: false
+    t.string "stripe_invoice_id", null: false
+    t.string "stripe_charge_id", null: false
+    t.boolean "closed", default: false
+    t.string "currency", null: false
+    t.datetime "payment_processed_at"
+    t.datetime "next_payment_attemp"
+    t.boolean "paid", default: false
+    t.decimal "subtotal", precision: 8, scale: 2, null: false
+    t.decimal "tax", precision: 8, scale: 2, null: false
+    t.integer "tax_percent", null: false
+    t.decimal "total", precision: 8, scale: 2, null: false
+    t.datetime "subscription_period_started_at"
+    t.datetime "subscription_period_ended_at"
+    t.decimal "starting_balance", precision: 10, scale: 2
+    t.decimal "ending_balance", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "fk_rails_3d1522a0d8"
   end
 
   create_table "permissions", primary_key: "permission_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -142,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_141807) do
     t.index ["user_id"], name: "fk_rails_3d8a7b9295"
   end
 
+  add_foreign_key "invoices", "users", primary_key: "user_id"
   add_foreign_key "plans", "plan_types", primary_key: "plan_type_id"
   add_foreign_key "plans_permissions", "permissions", primary_key: "permission_id"
   add_foreign_key "plans_permissions", "plans", primary_key: "plan_id"

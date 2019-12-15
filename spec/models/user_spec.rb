@@ -20,5 +20,9 @@ RSpec.describe User, type: :model do
     it "has many :plans" do
       should have_many(:plans)
     end
+
+    it "has many :invoices" do
+      should have_many(:invoices)
+    end
   end
 end
