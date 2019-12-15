@@ -15,5 +15,9 @@ RSpec.describe DeployMethod, type: :model do
     it "has many :deploy_histories" do
       should have_many(:deploy_histories)
     end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
   end
 end

@@ -5,6 +5,7 @@ FactoryBot.define do
     user { default_user }
     project_status { default_project_status }
     project_group { default_project_group }
+    deploy_method { default_deploy_method }
     project_name { default_project_name }
     thumbnail { default_thumbnail }
     is_on_trial { default_trial_ended_at }
@@ -16,6 +17,7 @@ FactoryBot.define do
       default_user { create(:user) }
       default_project_status { create(:project_status) }
       default_project_group { create(:project_group) }
+      default_deploy_method { create(:deploy_method) }
       default_project_name { "Sample Project" }
       default_thumbnail { nil }
       default_is_on_trial { false }
