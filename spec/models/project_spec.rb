@@ -26,5 +26,9 @@ RSpec.describe Project, type: :model do
     it "belongs to :project_group" do
       should belong_to(:project_group)
     end
+
+    it "has many :deploy_histories" do
+      should have_many(:deploy_histories)
+    end
   end
 end

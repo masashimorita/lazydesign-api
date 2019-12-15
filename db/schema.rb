@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_041021) do
+ActiveRecord::Schema.define(version: 2019_12_15_050555) do
+
+  create_table "deploy_histories", primary_key: "deploy_history_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "deploy_method_id", null: false
+    t.binary "project_id", limit: 128, null: false
+    t.datetime "deployed_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deploy_method_id"], name: "fk_rails_b1cf451fd6"
+    t.index ["project_id"], name: "fk_rails_bd06edb4a8"
+  end
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -192,6 +202,8 @@ ActiveRecord::Schema.define(version: 2019_12_15_041021) do
     t.index ["user_id"], name: "fk_rails_3d8a7b9295"
   end
 
+  add_foreign_key "deploy_histories", "deploy_methods", primary_key: "deploy_method_id"
+  add_foreign_key "deploy_histories", "projects", primary_key: "project_id"
   add_foreign_key "invoices", "users", primary_key: "user_id"
   add_foreign_key "plans", "plan_types", primary_key: "plan_type_id"
   add_foreign_key "plans_permissions", "permissions", primary_key: "permission_id"
