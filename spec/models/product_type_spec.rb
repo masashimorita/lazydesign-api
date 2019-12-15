@@ -8,4 +8,14 @@ RSpec.describe ProductType, type: :model do
     it { should validate_numericality_of(:product_type_id) }
     it { should validate_presence_of(:product_type_name) }
   end
+
+  describe "Association" do
+    it "has many :templates" do
+      should have_many(:templates)
+    end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
+  end
 end

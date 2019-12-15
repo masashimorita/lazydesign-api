@@ -2,8 +2,18 @@ class User < ApplicationRecord
   self.primary_key = :user_id
 
   has_secure_password
-  before_create { self.id = Ulid.generate }
+  include GenerateUlid
+
+  has_many :users_permissions, primary_key: :user_permission_id, foreign_key: :user_permission_id, dependent: :destroy
+  has_many :permissions, through: :users_permissions, source: :permission
+  has_many :subscriptions, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
+  has_many :plans, through: :subscriptions, source: :plan
+  has_many :invoices, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
+  has_many :project_groups, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
+  has_many :projects, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
+  has_many :domains, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: true }
+  validates :tutorial_completed, allow_blank: true, inclusion: [true, false]
 end

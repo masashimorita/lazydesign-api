@@ -10,4 +10,14 @@ RSpec.describe DeployMethod, type: :model do
     it { should validate_presence_of(:deploy_program) }
     it { should validate_presence_of(:entry_point) }
   end
+
+  describe "Association" do
+    it "has many :deploy_histories" do
+      should have_many(:deploy_histories)
+    end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
+  end
 end

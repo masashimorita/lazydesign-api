@@ -9,4 +9,10 @@ RSpec.describe FileType, type: :model do
     it { should validate_presence_of(:file_type_name) }
     it { should validate_presence_of(:file_extension)}
   end
+
+  describe "Association" do
+    it "has many :file_contents" do
+      should have_many(:file_contents)
+    end
+  end
 end

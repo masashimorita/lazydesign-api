@@ -8,6 +8,7 @@ properties:
       - id
       - type
       - attributes
+      - links
     properties:
       id:
         type: string
@@ -20,6 +21,7 @@ properties:
           - name
           - email
           - token
+          - tutorial_completed
         properties:
           user_id:
             type: string
@@ -28,4 +30,13 @@ properties:
           email:
             type: string
           token:
+            type: string, null
+          tutorial_completed:
+            type: boolean
+      links:
+        type: object
+        required:
+          - image
+        properties:
+          image:
             type: string, null

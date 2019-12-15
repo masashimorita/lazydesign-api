@@ -18,10 +18,7 @@ module Api
 
       def update
         @user = current_user
-        update_params.each do |key ,value|
-          next if value.blank?
-          @user[key] = value
-        end
+        @user.update_attributes(update_params)
         @user.save!
         response_success(Api::V1::UserSerializer.new(@user))
       end
@@ -33,7 +30,7 @@ module Api
       end
 
       def update_params
-        params.require(:user).permit(:name, :email)
+        params.require(:user).permit(:name, :email, :image, :tutorial_completed)
       end
 
       def auth_token(entity)
