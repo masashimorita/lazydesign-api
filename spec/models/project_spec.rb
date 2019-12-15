@@ -35,6 +35,10 @@ RSpec.describe Project, type: :model do
       should have_many(:configurations)
     end
 
+    it "has many :pages" do
+      should have_many(:pages)
+    end
+
     it "has one :domain" do
       should have_one(:domain)
     end
