@@ -14,5 +14,5 @@ class User < ApplicationRecord
   has_many :domains, primary_key: :user_id, foreign_key: :user_id
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: { case_sensitive: true }
 end

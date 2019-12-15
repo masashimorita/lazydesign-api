@@ -6,6 +6,6 @@ class Permission < ApplicationRecord
   has_many :plans_permissions, primary_key: :plan_id, foreign_key: :plan_id
   has_many :plans, through: :plans_permissions, source: :plan
 
-  validates :permission_id, presence: true, uniqueness: true, numericality: { only_integer: true }
+  validates :permission_id, presence: true, uniqueness: { case_sensitive: true }, numericality: { only_integer: true }
   validates_presence_of :permission_code, :permission_description
 end
