@@ -30,5 +30,9 @@ RSpec.describe Project, type: :model do
     it "has many :deploy_histories" do
       should have_many(:deploy_histories)
     end
+
+    it "has one :domain" do
+      should have_one(:domain)
+    end
   end
 end

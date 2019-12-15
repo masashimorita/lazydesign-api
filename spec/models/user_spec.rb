@@ -32,5 +32,9 @@ RSpec.describe User, type: :model do
     it "has many :projects" do
       should have_many(:projects)
     end
+
+    it "has many :domains" do
+      should have_many(:domains)
+    end
   end
 end
