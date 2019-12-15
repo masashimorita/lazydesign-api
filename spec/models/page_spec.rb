@@ -10,5 +10,9 @@ RSpec.describe Page, type: :model do
     it "belongs to :container" do
       should belong_to(:container)
     end
+
+    it "has many :file_contents" do
+      should have_many(:file_contents)
+    end
   end
 end

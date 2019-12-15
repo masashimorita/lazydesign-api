@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_062438) do
+ActiveRecord::Schema.define(version: 2019_12_15_063604) do
 
   create_table "configurations", primary_key: "configuration_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "configurator_type", null: false
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2019_12_15_062438) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "fk_rails_10e43d0096"
     t.index ["user_id"], name: "fk_rails_ed2a49436c"
+  end
+
+  create_table "file_contents", primary_key: "file_content_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "file_type_id", null: false
+    t.binary "page_id", limit: 128, null: false
+    t.string "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["file_type_id"], name: "fk_rails_a0b7b2c710"
+    t.index ["page_id"], name: "fk_rails_b4f49a141f"
   end
 
   create_table "file_types", primary_key: "file_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -236,6 +246,8 @@ ActiveRecord::Schema.define(version: 2019_12_15_062438) do
   add_foreign_key "deploy_histories", "projects", primary_key: "project_id"
   add_foreign_key "domains", "projects", primary_key: "project_id"
   add_foreign_key "domains", "users", primary_key: "user_id"
+  add_foreign_key "file_contents", "file_types", primary_key: "file_type_id"
+  add_foreign_key "file_contents", "pages", primary_key: "page_id"
   add_foreign_key "invoices", "users", primary_key: "user_id"
   add_foreign_key "plans", "plan_types", primary_key: "plan_type_id"
   add_foreign_key "plans_permissions", "permissions", primary_key: "permission_id"
