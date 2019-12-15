@@ -10,5 +10,9 @@ RSpec.describe ProjectGroup, type: :model do
     it "belongs to :user" do
       should belong_to(:user)
     end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
   end
 end

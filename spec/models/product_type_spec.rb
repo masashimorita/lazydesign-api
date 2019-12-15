@@ -13,5 +13,9 @@ RSpec.describe ProductType, type: :model do
     it "has many :templates" do
       should have_many(:templates)
     end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
   end
 end

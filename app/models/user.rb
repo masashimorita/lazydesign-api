@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :plans, through: :subscriptions, source: :plan
   has_many :invoices, primary_key: :user_id, foreign_key: :user_id
   has_many :project_groups, primary_key: :user_id, foreign_key: :user_id
+  has_many :projects, primary_key: :user_id, foreign_key: :user_id
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true

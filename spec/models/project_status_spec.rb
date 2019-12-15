@@ -8,4 +8,10 @@ RSpec.describe ProjectStatus, type: :model do
     it { should validate_numericality_of(:project_status_id) }
     it { should validate_presence_of(:project_status_name) }
   end
+
+  describe "Association" do
+    it "has many :projects" do
+      should have_many(:projects)
+    end
+  end
 end

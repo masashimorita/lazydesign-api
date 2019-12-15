@@ -28,5 +28,9 @@ RSpec.describe User, type: :model do
     it "has many :project_groups" do
       should have_many(:project_groups)
     end
+
+    it "has many :projects" do
+      should have_many(:projects)
+    end
   end
 end

@@ -15,6 +15,9 @@ RSpec.describe Template, type: :model do
     it "has many :template_parts" do
       should have_many(:tags)
     end
+    it "has many :projects" do
+      should have_many(:projects)
+    end
     it "belongs to :product_type" do
       should belong_to(:product_type)
     end

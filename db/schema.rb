@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_035211) do
+ActiveRecord::Schema.define(version: 2019_12_15_041021) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -91,6 +91,25 @@ ActiveRecord::Schema.define(version: 2019_12_15_035211) do
 
   create_table "project_statuses", primary_key: "project_status_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "project_status_name", null: false
+  end
+
+  create_table "projects", primary_key: "project_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "product_type_id", null: false
+    t.binary "template_id", limit: 128, null: false
+    t.binary "user_id", limit: 128, null: false
+    t.bigint "project_status_id", null: false
+    t.binary "project_group_id", limit: 128, null: false
+    t.string "project_name", null: false
+    t.string "thumbnail"
+    t.boolean "is_on_trial", default: false
+    t.datetime "trial_ended_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_type_id"], name: "fk_rails_41c1cf427e"
+    t.index ["project_group_id"], name: "fk_rails_1ce32c7182"
+    t.index ["project_status_id"], name: "fk_rails_9a8c72b8ef"
+    t.index ["template_id"], name: "fk_rails_9702eec5cd"
+    t.index ["user_id"], name: "fk_rails_b872a6760a"
   end
 
   create_table "subscriptions", primary_key: "subscription_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -178,6 +197,11 @@ ActiveRecord::Schema.define(version: 2019_12_15_035211) do
   add_foreign_key "plans_permissions", "permissions", primary_key: "permission_id"
   add_foreign_key "plans_permissions", "plans", primary_key: "plan_id"
   add_foreign_key "project_groups", "users", primary_key: "user_id"
+  add_foreign_key "projects", "product_types", primary_key: "product_type_id"
+  add_foreign_key "projects", "project_groups", primary_key: "project_group_id"
+  add_foreign_key "projects", "project_statuses", primary_key: "project_status_id"
+  add_foreign_key "projects", "templates", primary_key: "template_id"
+  add_foreign_key "projects", "users", primary_key: "user_id"
   add_foreign_key "subscriptions", "plans", primary_key: "plan_id"
   add_foreign_key "subscriptions", "users", primary_key: "user_id"
   add_foreign_key "tags", "tag_groups", primary_key: "tag_group_id"
