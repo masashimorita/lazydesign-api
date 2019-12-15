@@ -15,4 +15,5 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: true }
+  validates :tutorial_completed, allow_blank: true, inclusion: [true, false]
 end
