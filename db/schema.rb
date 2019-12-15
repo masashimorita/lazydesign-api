@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_144220) do
+ActiveRecord::Schema.define(version: 2019_12_15_035211) do
 
   create_table "deploy_methods", primary_key: "deploy_method_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "deploy_method_name", null: false
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 2019_12_14_144220) do
 
   create_table "product_types", primary_key: "product_type_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "product_type_name", null: false
+  end
+
+  create_table "project_groups", primary_key: "project_group_id", id: :binary, limit: 128, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.binary "user_id", limit: 128, null: false
+    t.string "project_group_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "fk_rails_e44245847b"
   end
 
   create_table "project_statuses", primary_key: "project_status_id", id: :bigint, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -169,6 +177,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_144220) do
   add_foreign_key "plans", "plan_types", primary_key: "plan_type_id"
   add_foreign_key "plans_permissions", "permissions", primary_key: "permission_id"
   add_foreign_key "plans_permissions", "plans", primary_key: "plan_id"
+  add_foreign_key "project_groups", "users", primary_key: "user_id"
   add_foreign_key "subscriptions", "plans", primary_key: "plan_id"
   add_foreign_key "subscriptions", "users", primary_key: "user_id"
   add_foreign_key "tags", "tag_groups", primary_key: "tag_group_id"

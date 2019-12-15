@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
   describe "Model Validation" do
-    let!(:invoice) { create(:invoice) }
+    subject { create(:invoice) }
     it { should validate_presence_of(:stripe_customer_id) }
     it { should validate_presence_of(:stripe_invoice_id) }
     it { should validate_presence_of(:stripe_charge_id) }

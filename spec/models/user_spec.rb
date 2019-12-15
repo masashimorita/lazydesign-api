@@ -24,5 +24,9 @@ RSpec.describe User, type: :model do
     it "has many :invoices" do
       should have_many(:invoices)
     end
+
+    it "has many :project_groups" do
+      should have_many(:project_groups)
+    end
   end
 end
