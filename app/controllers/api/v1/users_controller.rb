@@ -32,14 +32,6 @@ module Api
       def update_params
         params.require(:user).permit(:name, :email, :image, :tutorial_completed)
       end
-
-      def auth_token(entity)
-        if entity.respond_to? :to_token_payload
-          Knock::AuthToken.new payload: entity.to_token_payload
-        else
-          Knock::AuthToken.new payload: { sub: entity.id }
-        end
-      end
     end
   end
 end
