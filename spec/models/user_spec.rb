@@ -37,4 +37,28 @@ RSpec.describe User, type: :model do
       should have_many(:domains)
     end
   end
+
+  describe "#from_token_payload" do
+    let!(:user) { create(:user) }
+    let(:payload) { { user_id: user.id }.with_indifferent_access }
+    it "return user when payload has :user_id & is valid" do
+      expect(User.from_token_payload(payload)).to eq user
+    end
+
+    it "return nil when payload dose not have :user_id" do
+      expect(User.from_token_payload({ invalid: true })).to be nil
+    end
+
+    it "return nil when payload has :user_id but invalid" do
+      expect(User.from_token_payload({ user_id: "invalid" })).to be nil
+    end
+  end
+
+  describe "#to_token_payload" do
+    let!(:user) { create(:user) }
+    let(:expected_payload) { { user_id: user.id } }
+    it "return payload to use in generating JSON Web Token" do
+      expect(user.send(:to_token_payload)).to eq expected_payload
+    end
+  end
 end
