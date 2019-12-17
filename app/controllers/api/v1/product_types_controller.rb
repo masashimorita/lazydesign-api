@@ -1,7 +1,8 @@
 module Api
   module V1
     class ProductTypesController < Api::V1::ApiController
-      before_action :authenticate_user
+      before_action :authenticate_admin, except: [:index, :show]
+      before_action :authenticate_admin_or_user, only: [:index, :show]
       before_action :find_record, only: [:show, :update, :destroy]
 
       def index

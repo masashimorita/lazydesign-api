@@ -18,11 +18,11 @@ module RequestUtils
   private
   def auth_header(is_admin)
     if is_admin
-      entity = current_admin || create(:admin)
+      payload = { admin_id: (current_admin rescue create(:admin)).id }
     else
-      entity = current_user || create(:user)
+      payload = { user_id: (current_user rescue create(:user)).id }
     end
-    token_info = Knock::AuthToken.new payload: { sub: entity.id }
+    token_info = Knock::AuthToken.new payload: payload
     { Authorization: "Bearer #{token_info.token}" }.with_indifferent_access
   end
 end
