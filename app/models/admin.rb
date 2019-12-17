@@ -7,8 +7,6 @@ class Admin < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: true }
   validates :is_super_admin, allow_blank: true, inclusion: [true, false]
 
-  private
-
   def self.from_token_payload(payload)
     payload["admin_id"] ? self.find(payload["admin_id"]) : nil
   end
