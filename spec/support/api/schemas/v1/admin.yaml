@@ -1,0 +1,34 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    type: object
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      attributes:
+        type: object
+        required:
+          - admin_id
+          - name
+          - email
+          - token
+          - is_super_admin
+        properties:
+          admin_id:
+            type: string
+          name:
+            type: string
+          email:
+            type: string
+          token:
+            type: string, null
+          is_super_admin:
+            type: boolean

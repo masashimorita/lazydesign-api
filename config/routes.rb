@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      # Admin API
+      get 'admins/me' => 'admins#show'
+      put 'admins/update' => 'admins#update'
+      post 'admins/sign_up' => 'admins#create'
+      post 'admins/sign_in' => 'admin_token#create'
+
+      # User API
       get 'users/me' => 'users#show'
       put 'users/update' => 'users#update'
       post 'users/sign_up' => 'users#create'
