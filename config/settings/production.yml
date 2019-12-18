@@ -1,0 +1,5 @@
+aws:
+  host: ""
+  region: ""
+  asset_host: ""
+  bucket: ""
