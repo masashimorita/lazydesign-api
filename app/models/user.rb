@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_secure_password
   include GenerateUlid
 
+  mount_uploader :image, UserUploader
+
   has_many :users_permissions, primary_key: :user_permission_id, foreign_key: :user_permission_id, dependent: :destroy
   has_many :permissions, through: :users_permissions, source: :permission
   has_many :subscriptions, primary_key: :user_id, foreign_key: :user_id, dependent: :destroy
@@ -16,8 +18,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: true }
   validates :tutorial_completed, allow_blank: true, inclusion: [true, false]
-
-  private
 
   def self.from_token_payload(payload)
     payload["user_id"] ? self.find(payload["user_id"]) : nil

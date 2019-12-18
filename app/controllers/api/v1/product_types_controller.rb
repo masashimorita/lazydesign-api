@@ -35,11 +35,11 @@ module Api
       private
 
       def request_params
-        params.require(:product_type).permit(:product_type_id, :product_type_name)
+        params.permit(:product_type_id, :product_type_name)
       end
 
       def update_params
-        params.require(:product_type).permit(:product_type_name)
+        params.permit(:product_type_name)
       end
 
       def find_record

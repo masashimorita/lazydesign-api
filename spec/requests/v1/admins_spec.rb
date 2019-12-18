@@ -29,7 +29,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     let(:path) { "/api/v1/admins/sign_up" }
     let(:password) { "password" }
     let!(:admin_info) { build(:admin, default_password: password).attributes }
-    let!(:params) { { admin: { email: admin_info["email"], name: admin_info["name"], password: password } } }
+    let!(:params) { { email: admin_info["email"], name: admin_info["name"], password: password } }
     subject { post path, params: params }
 
     it "create a new admin" do
@@ -40,7 +40,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
       expect(response).to match_response_schema("v1/admin")
     end
     it "return bad request response when required parameters is not given" do
-      params[:admin]["email"] = nil
+      params["email"] = nil
       subject
       expect(response.status).to eq 400
     end
@@ -56,7 +56,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     let(:path) { "/api/v1/admins/sign_in" }
     let(:password) { "password" }
     let!(:admin) { create(:admin, default_password: password) }
-    let!(:params) { { auth: { email: admin[:email], password: password } } }
+    let!(:params) { { email: admin[:email], password: password } }
     subject { post path, params: params }
 
     it "has valid json schema" do
@@ -64,7 +64,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
       expect(response).to match_response_schema("v1/admin")
     end
     it "return not found when admin with given email was not found" do
-      params[:auth][:email] = "invalid@example.com"
+      params[:email] = "invalid@example.com"
       subject
       expect(response.status).to eq 404
     end
@@ -75,7 +75,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     let(:path) { "/api/v1/admins/update" }
     let!(:current_admin) { create(:admin) }
     let!(:new_name) { "updated" }
-    let!(:params) { { admin: { name: new_name } } }
+    let!(:params) { { name: new_name } }
 
     context "with authorization" do
       subject { put_with_auth path, params, {}, true }

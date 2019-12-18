@@ -29,7 +29,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
     let(:path) { "/api/v1/users/sign_up" }
     let(:password) { "password" }
     let!(:user_info) { build(:user, default_password: password).attributes }
-    let!(:params) { { user: { email: user_info["email"], name: user_info["name"], password: password } } }
+    let!(:params) { { email: user_info["email"], name: user_info["name"], password: password } }
     subject { post path, params: params }
 
     it "create a new user" do
@@ -40,7 +40,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
       expect(response).to match_response_schema("v1/user")
     end
     it "return bad request response when required parameters is not given" do
-      params[:user]["email"] = nil
+      params["email"] = nil
       subject
       expect(response.status).to eq 400
     end
@@ -56,7 +56,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
     let(:path) { "/api/v1/users/sign_in" }
     let(:password) { "password" }
     let!(:user) { create(:user, default_password: password) }
-    let!(:params) { { auth: { email: user[:email], password: password } } }
+    let!(:params) { { email: user[:email], password: password } }
     subject { post path, params: params }
 
     it "has valid json schema" do
@@ -64,7 +64,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
       expect(response).to match_response_schema("v1/user")
     end
     it "return not found when user with given email was not found" do
-      params[:auth][:email] = "invalid@example.com"
+      params[:email] = "invalid@example.com"
       subject
       expect(response.status).to eq 404
     end
@@ -75,7 +75,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
     let(:path) { "/api/v1/users/update" }
     let!(:current_user) { create(:user) }
     let!(:new_name) { "updated" }
-    let!(:params) { { user: { name: new_name } } }
+    let!(:params) { { name: new_name } }
 
     context "with authorization" do
       subject { put_with_auth path, params }
