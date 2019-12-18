@@ -26,11 +26,11 @@ module Api
       private
 
       def sign_up_params
-        params.require(:admin).permit(:name, :email, :password)
+        params.permit(:name, :email, :password)
       end
 
       def update_params
-        params.require(:admin).permit(:name, :email)
+        params.permit(:name, :email)
       end
     end
   end

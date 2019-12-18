@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::ProductTypeAPI", type: :request do
   describe "POST /api/v1/product_types" do
     let(:current_admin) { create(:admin) }
     let(:path) { "/api/v1/product_types" }
-    let(:params) { { product_type: { product_type_id: 99, product_type_name: "Sample" } } }
+    let(:params) { { product_type_id: 99, product_type_name: "Sample" } }
 
     context "with Admin authorization" do
       subject { post_with_auth path, params, {}, true }
@@ -133,7 +133,7 @@ RSpec.describe "Api::V1::ProductTypeAPI", type: :request do
     let(:path) { "/api/v1/product_types" }
     let(:product_type_id) { create(:product_type)[:product_type_id] }
     let(:new_product_type_name) { "Updated Product Type Name" }
-    let(:params) { { product_type: { product_type_name: new_product_type_name } } }
+    let(:params) { { product_type_name: new_product_type_name } }
 
     context "with Admin authorization" do
       subject { put_with_auth "#{path}/#{product_type_id}", params, {}, true }
