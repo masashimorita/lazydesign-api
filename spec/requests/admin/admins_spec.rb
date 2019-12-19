@@ -1,9 +1,11 @@
-RSpec.describe "Api::V1::AdminAPI", type: :request do
+require "rails_helper"
+
+RSpec.describe "Api::Admin::AdminAPI", type: :request do
   after(:each) { Admin.delete_all }
 
-  describe "GET /api/v1/admins/me" do
+  describe "GET /api/admin/admins/me" do
     let!(:current_admin) { create(:admin) }
-    let(:path) { "/api/v1/admins/me" }
+    let(:path) { "/api/admin/admins/me" }
 
     context "with authorization" do
       subject { get_with_auth path, {}, {}, true }
@@ -14,7 +16,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
       end
       it "has valid json schema" do
         subject
-        expect(response).to match_response_schema("v1/admin")
+        expect(response).to match_response_schema("admin/admin")
       end
       it_behaves_like "200"
     end
@@ -25,8 +27,8 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     end
   end
 
-  describe "POST /api/v1/admins/sign_up" do
-    let(:path) { "/api/v1/admins/sign_up" }
+  describe "POST /api/admin/admins/sign_up" do
+    let(:path) { "/api/admin/admins/sign_up" }
     let(:password) { "password" }
     let!(:admin_info) { build(:admin, default_password: password).attributes }
     let!(:params) { { email: admin_info["email"], name: admin_info["name"], password: password } }
@@ -37,7 +39,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     end
     it "has valid json schema" do
       subject
-      expect(response).to match_response_schema("v1/admin")
+      expect(response).to match_response_schema("admin/admin")
     end
     it "return bad request response when required parameters is not given" do
       params["email"] = nil
@@ -52,8 +54,8 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     it_behaves_like "201"
   end
 
-  describe "POST /api/v1/admins/sign_in" do
-    let(:path) { "/api/v1/admins/sign_in" }
+  describe "POST /api/admin/admins/sign_in" do
+    let(:path) { "/api/admin/admins/sign_in" }
     let(:password) { "password" }
     let!(:admin) { create(:admin, default_password: password) }
     let!(:params) { { email: admin[:email], password: password } }
@@ -61,7 +63,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
 
     it "has valid json schema" do
       subject
-      expect(response).to match_response_schema("v1/admin")
+      expect(response).to match_response_schema("admin/admin")
     end
     it "return not found when admin with given email was not found" do
       params[:email] = "invalid@example.com"
@@ -71,8 +73,8 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
     it_behaves_like "200"
   end
 
-  describe "PUT /api/v1/admins/update" do
-    let(:path) { "/api/v1/admins/update" }
+  describe "PUT /api/admin/admins/update" do
+    let(:path) { "/api/admin/admins/update" }
     let!(:current_admin) { create(:admin) }
     let!(:new_name) { "updated" }
     let!(:params) { { name: new_name } }
@@ -82,7 +84,7 @@ RSpec.describe "Api::V1::AdminAPI", type: :request do
 
       it "has valid json schema" do
         subject
-        expect(response).to match_response_schema("v1/admin")
+        expect(response).to match_response_schema("admin/admin")
       end
       it_behaves_like "200"
     end

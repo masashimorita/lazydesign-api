@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UsersController < Api::V1::ApiController
+    class UsersController < Api::V1::BaseController
       before_action :authenticate_user, except: [:create]
 
       def show

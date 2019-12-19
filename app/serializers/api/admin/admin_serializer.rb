@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module Admin
     class AdminSerializer
       include FastJsonapi::ObjectSerializer
       set_id :admin_id
