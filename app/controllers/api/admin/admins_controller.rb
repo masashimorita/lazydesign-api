@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_admin, except: [:create]
 
       def show
-        response_success(Api::Admin::AdminSerializer.new(current_admin).serialized_json)
+        response_success(current_admin, Api::Admin::AdminSerializer)
       end
 
       def create
@@ -12,15 +12,15 @@ module Api
         raise LazyDesign::BadRequest if sign_up_params[:name].blank? || sign_up_params[:email].blank? || sign_up_params[:password].blank?
 
         @admin = ::Admin.create!(sign_up_params)
-        token = auth_token(@admin).token
-        response_item_created(Api::Admin::AdminSerializer.new(@admin, {params: {token: token}}).serialized_json)
+        @admin[:token] = auth_token(@admin).token
+        response_item_created(@admin, Api::Admin::AdminSerializer)
       end
 
       def update
         @admin = current_admin
         @admin.update_attributes(update_params)
         @admin.save!
-        response_success(Api::Admin::AdminSerializer.new(@admin))
+        response_success(@admin, Api::Admin::AdminSerializer)
       end
 
       private

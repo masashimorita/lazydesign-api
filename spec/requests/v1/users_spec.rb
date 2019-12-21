@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::UserAPI", type: :request do
 
       it "get current logged in user info" do
         subject
-        expect(JSON.parse(response.body)["data"]).not_to be nil
+        expect(JSON.parse(response.body)).not_to be nil
       end
       it "has valid json schema" do
         subject

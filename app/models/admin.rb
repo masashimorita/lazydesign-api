@@ -1,5 +1,7 @@
 class Admin < ApplicationRecord
   self.primary_key = :admin_id
+  attribute :token, :string
+
   has_secure_password
   include GenerateUlid
 

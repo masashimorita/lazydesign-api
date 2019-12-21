@@ -1,9 +1,6 @@
 module Api
   module Admin
-    class ProductTypeSerializer
-      include FastJsonapi::ObjectSerializer
-      set_id :product_type_id
-
+    class ProductTypeSerializer < ActiveModel::Serializer
       attributes :product_type_id, :product_type_name
     end
   end

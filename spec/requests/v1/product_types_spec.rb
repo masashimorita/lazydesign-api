@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::ProductTypeAPI", type: :request do
       it "get all records" do
         subject
         body = JSON.parse(response.body)
-        expect(body["data"].length).to eq count
+        expect(body.length).to eq count
       end
       it "has valid json schema" do
         subject
