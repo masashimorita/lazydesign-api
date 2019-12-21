@@ -12,7 +12,7 @@ RSpec.describe "Api::Admin::ProductTypeAPI", type: :request do
       it "get all records" do
         subject
         body = JSON.parse(response.body)
-        expect(body["data"].length).to eq count
+        expect(body.length).to eq count
       end
       it "has valid json schema" do
         subject
@@ -41,7 +41,7 @@ RSpec.describe "Api::Admin::ProductTypeAPI", type: :request do
       it "get created record" do
         subject
         body = JSON.parse(response.body)
-        expect(body["data"]).not_to be nil
+        expect(body).not_to be nil
       end
       it "has valid json schema" do
         subject

@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user, except: [:create]
 
       def show
-        response_success(Api::V1::UserSerializer.new(current_user).serialized_json)
+        response_success(current_user, Api::V1::UserSerializer)
       end
 
       def create
@@ -12,15 +12,15 @@ module Api
         raise LazyDesign::BadRequest if sign_up_params[:name].blank? || sign_up_params[:email].blank? || sign_up_params[:password].blank?
 
         @user = User.create!(sign_up_params)
-        token = auth_token(@user).token
-        response_item_created(Api::V1::UserSerializer.new(@user, {params: {token: token}}).serialized_json)
+        @user[:token] = auth_token(@user).token
+        response_item_created(@user, Api::V1::UserSerializer)
       end
 
       def update
         @user = current_user
         @user.update_attributes(update_params)
         @user.save!
-        response_success(Api::V1::UserSerializer.new(@user))
+        response_success(@user, Api::V1::UserSerializer)
       end
 
       private

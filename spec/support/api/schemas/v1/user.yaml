@@ -1,42 +1,21 @@
 type: object
 required:
-  - data
+  - user_id
+  - name
+  - email
+  - token
+  - tutorial_completed
+  - image
 properties:
-  data:
-    type: object
-    required:
-      - id
-      - type
-      - attributes
-      - links
-    properties:
-      id:
-        type: string
-      type:
-        type: string
-      attributes:
-        type: object
-        required:
-          - user_id
-          - name
-          - email
-          - token
-          - tutorial_completed
-        properties:
-          user_id:
-            type: string
-          name:
-            type: string
-          email:
-            type: string
-          token:
-            type: string, null
-          tutorial_completed:
-            type: boolean
-      links:
-        type: object
-        required:
-          - image
-        properties:
-          image:
-            type: string, null
+  user_id:
+    type: string
+  name:
+    type: string
+  email:
+    type: string
+  token:
+    type: string, null
+  tutorial_completed:
+    type: boolean
+  image:
+    type: string, null

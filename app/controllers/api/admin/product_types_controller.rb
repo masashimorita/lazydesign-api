@@ -6,11 +6,11 @@ module Api
 
       def index
         product_types = ProductType.all
-        response_success(Api::Admin::ProductTypeSerializer.new(product_types).serialized_json)
+        response_success(product_types, Api::Admin::ProductTypeSerializer)
       end
 
       def show
-        response_success(Api::Admin::ProductTypeSerializer.new(@product_type).serialized_json)
+        response_success(@product_type, Api::Admin::ProductTypeSerializer)
       end
 
       def update
@@ -18,12 +18,12 @@ module Api
           raise LazyDesign::InvalidParameterError, "Required parameter :product_type_name is not valid"
         end
         @product_type.update!(update_params)
-        response_success(Api::Admin::ProductTypeSerializer.new(@product_type).serialized_json)
+        response_success(@product_type, Api::Admin::ProductTypeSerializer)
       end
 
       def create
         product_type = ProductType.create!(request_params)
-        response_item_created(Api::Admin::ProductTypeSerializer.new(product_type).serialized_json)
+        response_item_created(product_type, Api::Admin::ProductTypeSerializer)
       end
 
       def destroy

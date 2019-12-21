@@ -5,7 +5,8 @@ module Api
       skip_before_action :verify_authenticity_token
 
       def create
-        response_success(Api::Admin::AdminSerializer.new(entity, {params: {token: auth_token.token}}).serialized_json)
+        entity[:token] = auth_token.token
+        response_success(entity, Api::Admin::AdminSerializer)
       end
 
       private

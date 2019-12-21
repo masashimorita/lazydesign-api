@@ -6,11 +6,11 @@ module Api
 
       def index
         product_types = ProductType.all
-        response_success(Api::V1::ProductTypeSerializer.new(product_types).serialized_json)
+        response_success(product_types, Api::V1::ProductTypeSerializer)
       end
 
       def show
-        response_success(Api::V1::ProductTypeSerializer.new(@product_type).serialized_json)
+        response_success(@product_type, Api::V1::ProductTypeSerializer.new(@product_type))
       end
 
       private

@@ -27,7 +27,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'knock'
 
-gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10.2'
 
 gem 'carrierwave'
 gem 'rmagick'

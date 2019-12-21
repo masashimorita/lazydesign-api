@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   self.primary_key = :user_id
+  attribute :token, :string
 
   has_secure_password
   include GenerateUlid
