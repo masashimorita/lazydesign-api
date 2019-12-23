@@ -7,5 +7,5 @@ class Permission < ApplicationRecord
   has_many :plans, through: :plans_permissions, source: :plan
 
   validates :permission_id, presence: true, uniqueness: { case_sensitive: true }, numericality: { only_integer: true }
-  validates_presence_of :permission_code, :permission_description
+  validates_presence_of :permitted_target, :permitted_operation
 end

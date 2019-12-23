@@ -6,8 +6,8 @@ RSpec.describe Permission, type: :model do
     it { should validate_presence_of(:permission_id) }
     it { should validate_uniqueness_of(:permission_id) }
     it { should validate_numericality_of(:permission_id) }
-    it { should validate_presence_of(:permission_code) }
-    it { should validate_presence_of(:permission_description) }
+    it { should validate_presence_of(:permitted_target) }
+    it { should validate_presence_of(:permitted_operation) }
   end
 
   describe "Association" do
