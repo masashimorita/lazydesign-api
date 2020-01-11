@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_secure_password
   include GenerateUlid
+  include PermissionVerification
 
   mount_uploader :image, UserUploader
 
