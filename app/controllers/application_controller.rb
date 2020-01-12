@@ -2,6 +2,7 @@ require 'lazy_design/errors'
 
 class ApplicationController < ActionController::API
   include Response
+  include Pagy::Backend
 
   rescue_from StandardError do |e|
     Rails.logger.error e.message
