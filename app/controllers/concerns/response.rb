@@ -3,15 +3,16 @@ require "active_support"
 module Response
   extend ActiveSupport::Concern
 
-  def json_response(object, serializer = nil, status = 200)
+  def json_response(object, serializer = nil, status = 200, options = {})
     response = { json: object, status: status }
     response.merge({ serializer: serializer }) if serializer
+    response.merge!(options) if options.present?
     render response
   end
 
   # 200 Success
-  def response_success(object, serializer = nil)
-    json_response(object, serializer, 200)
+  def response_success(object, serializer = nil, options = {})
+    json_response(object, serializer, 200, options)
   end
 
   # 201 Item Created

@@ -5,8 +5,8 @@ module Api
       before_action :find_record, only: [:show]
 
       def index
-        product_types = ProductType.all
-        response_success(product_types, Api::V1::ProductTypeSerializer)
+        pagy, product_types = pagy(ProductType.all, page: params[:page] || 1)
+        response_success(product_types, Api::V1::ProductTypeSerializer, pagination: pagy.vars)
       end
 
       def show
