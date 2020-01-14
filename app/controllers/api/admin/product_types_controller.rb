@@ -6,7 +6,7 @@ module Api
 
       def index
         pagy, product_types = pagy(ProductType.all, page: params[:page] || 1)
-        response_success(product_types, Api::Admin::ProductTypeSerializer)
+        response_success(product_types, Api::Admin::ProductTypeSerializer, pagination: pagy.vars)
       end
 
       def show
