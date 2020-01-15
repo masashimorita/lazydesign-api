@@ -4,9 +4,8 @@ module Response
   extend ActiveSupport::Concern
 
   def json_response(object, serializer = nil, status = 200, options = {})
-    response = { json: object, status: status }
+    response = { json: object, status: status, root: "data" }.merge(options)
     response.merge({ serializer: serializer }) if serializer
-    response.merge!(options) if options.present?
     render response
   end
 
